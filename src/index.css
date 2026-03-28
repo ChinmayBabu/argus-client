@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #c0e8f8;
+  background-color: #010c18;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; overflow: hidden; }
+
+#root { height: 100%; width: 100%; }
+
+/* ── Dot grid background ────────────────────────────────── */
+body {
+  background-color: #010c18;
+  background-image:
+    radial-gradient(circle, rgba(0, 212, 255, 0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: center center;
+}
+
+/* Vignette overlay — fades dot grid at edges */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 30%, rgba(1, 12, 24, 0.85) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root { position: relative; z-index: 1; }
+
+/* ── Selection ──────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ── Focus ──────────────────────────────────────────────── */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 1px solid rgba(0, 212, 255, 0.6);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Horizontal rule (grid lines inside panels) ─────────── */
+hr {
+  border: none;
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
+  margin: 10px 0;
+}
+
+/* ── Global scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.4);
+}
+
+/* ── Panel mixin via shared class ────────────────────────── */
+.hud-panel {
+  background: rgba(1, 15, 31, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 4px;
+  position: relative;
+  box-shadow:
+    0 0 20px rgba(0, 212, 255, 0.06),
+    inset 0 0 30px rgba(0, 212, 255, 0.02);
+}
+
+/* Corner brackets on panels */
+.hud-panel::before,
+.hud-panel::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(0, 212, 255, 0.7);
+  border-style: solid;
+  z-index: 1;
+  pointer-events: none;
+}
+.hud-panel::before {
+  top: -1px; left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.hud-panel::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ── Cesium overrides ─────────────────────────────────── */
+.cesium-viewer-toolbar {
+  top: 8px !important;
+  right: 8px !important;
+}
+
+.cesium-viewer-toolbar > .cesium-button {
+  background: rgba(1, 15, 31, 0.85) !important;
+  border: 1px solid rgba(0, 212, 255, 0.3) !important;
+  color: #00d4ff !important;
+  border-radius: 2px !important;
+}
+
+.cesium-viewer-toolbar > .cesium-button:hover {
+  background: rgba(2, 22, 40, 0.95) !important;
+  border-color: rgba(0, 212, 255, 0.6) !important;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2) !important;
+}
+
+.cesium-viewer-animationContainer,
+.cesium-viewer-timelineContainer { display: none !important; }
+
+.cesium-viewer-cesiumWidgetContainer { height: 100% !important; }
+
+.cesium-credit-text { font-size: 8px !important; opacity: 0.25 !important; }

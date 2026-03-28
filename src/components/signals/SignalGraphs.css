@@ -1,0 +1,91 @@
+/* SignalGraphs — HUD Waveform Display */
+
+.signal-graphs {
+  background: rgba(1, 15, 31, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: 'Inter', sans-serif;
+  color: #c0e8f8;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.05), inset 0 0 20px rgba(0, 212, 255, 0.02);
+}
+
+.signal-graphs::before,
+.signal-graphs::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(0, 212, 255, 0.6);
+  border-style: solid;
+}
+.signal-graphs::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.signal-graphs::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.signal-header {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #00d4ff;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+.graphs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.graph-row { display: flex; gap: 8px; }
+
+.graph {
+  flex: 1;
+  background: rgba(0, 212, 255, 0.02);
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-top: 1px solid rgba(0, 212, 255, 0.18);
+}
+
+.graph.full-width { flex: none; width: 100%; }
+
+.graph-title {
+  font-size: 0.57rem;
+  color: #0099cc;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+/* Recharts overrides */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(0, 212, 255, 0.06) !important;
+}
+
+.recharts-text {
+  font-size: 9px !important;
+  fill: #2a5a7a !important;
+  font-family: 'SFMono-Regular', monospace !important;
+}
+
+.recharts-legend-wrapper { padding-top: 4px !important; }
+
+.recharts-legend-item-text {
+  font-size: 9px !important;
+  color: #2a5a7a !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(1, 15, 31, 0.97) !important;
+  border: 1px solid rgba(0, 212, 255, 0.3) !important;
+  border-radius: 3px !important;
+  font-size: 10px !important;
+  font-family: 'SFMono-Regular', monospace !important;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.15) !important;
+}

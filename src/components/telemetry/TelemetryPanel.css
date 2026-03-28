@@ -1,0 +1,121 @@
+/* TelemetryPanel — HUD Instrument Readout */
+
+.telemetry-panel {
+  background: rgba(1, 15, 31, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: 'Inter', sans-serif;
+  color: #c0e8f8;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.05), inset 0 0 20px rgba(0, 212, 255, 0.02);
+}
+
+.telemetry-panel::before,
+.telemetry-panel::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(0, 212, 255, 0.6);
+  border-style: solid;
+}
+.telemetry-panel::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.telemetry-panel::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  margin-bottom: 10px;
+}
+
+.telemetry-header > span:first-child {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #00d4ff;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+.telemetry-timestamp {
+  font-size: 0.6rem;
+  color: #2a5a7a;
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  letter-spacing: 0.05em;
+}
+
+.telemetry-no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+  color: #2a5a7a;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  font-family: 'SFMono-Regular', monospace;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 7px;
+}
+
+.telemetry-group {
+  background: rgba(0, 212, 255, 0.03);
+  border-radius: 3px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.telemetry-group-title {
+  font-size: 0.57rem;
+  color: #0099cc;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.07);
+}
+
+.telemetry-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.telemetry-channel {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.telemetry-label {
+  font-size: 0.62rem;
+  color: #2a5a7a;
+}
+
+.telemetry-value {
+  font-size: 0.7rem;
+  color: #ff9500;
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  text-align: right;
+}
+
+.telemetry-unit {
+  font-size: 0.55rem;
+  color: #2a5a7a;
+  font-weight: 400;
+}

@@ -1,0 +1,189 @@
+/* ═══════════════════════════════════════════════════════════
+   ARGUS — HUD Mission Control Interface
+   Aesthetic: Sci-Fi Holographic Display (SpaceX / JARVIS-style)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Design Tokens ─────────────────────────────────────── */
+:root {
+  --bg-deep:       #010c18;
+  --bg-panel:      #010f1f;
+  --bg-element:    #021628;
+  --bg-element-2:  #031e38;
+
+  --cyan:          #00d4ff;
+  --cyan-dim:      #0099cc;
+  --cyan-glow:     rgba(0, 212, 255, 0.15);
+  --cyan-border:   rgba(0, 212, 255, 0.35);
+  --cyan-border-2: rgba(0, 212, 255, 0.15);
+
+  --orange:        #ff9500;
+  --orange-dim:    rgba(255, 149, 0, 0.15);
+  --orange-border: rgba(255, 149, 0, 0.4);
+
+  --green:         #00ff88;
+  --green-dim:     rgba(0, 255, 136, 0.12);
+  --red:           #ff3b5c;
+  --red-dim:       rgba(255, 59, 92, 0.12);
+
+  --text-primary:  #c0e8f8;
+  --text-dim:      #2a5a7a;
+  --text-muted:    #0f3a56;
+
+  --mono: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+  --ui:   'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --header-h:    50px;
+  --statusbar-h: 26px;
+
+  --glow-sm:  0 0 8px  rgba(0, 212, 255, 0.25);
+  --glow-md:  0 0 16px rgba(0, 212, 255, 0.2);
+  --glow-lg:  0 0 30px rgba(0, 212, 255, 0.15);
+}
+
+/* ── Root ──────────────────────────────────────────────── */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  overflow: hidden;
+  font-family: var(--ui);
+  font-size: 12px;
+  position: relative;
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-h);
+  padding: 0 20px;
+  background: rgba(1, 15, 31, 0.95);
+  border-bottom: 1px solid var(--cyan-border);
+  box-shadow: 0 1px 20px rgba(0, 212, 255, 0.08), inset 0 -1px 0 rgba(0, 212, 255, 0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon { font-size: 1rem; }
+
+.header-logo h1 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  text-shadow: var(--glow-sm);
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-user {
+  font-size: 0.7rem;
+  color: var(--cyan-dim);
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  background: rgba(0, 212, 255, 0.05);
+  border-radius: 2px;
+  border: 1px solid var(--cyan-border-2);
+}
+
+.logout-btn {
+  background: var(--red-dim);
+  border: 1px solid rgba(255, 59, 92, 0.35);
+  color: var(--red);
+  padding: 5px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.15s;
+  font-family: var(--ui);
+}
+.logout-btn:hover {
+  background: rgba(255, 59, 92, 0.2);
+  box-shadow: 0 0 12px rgba(255, 59, 92, 0.2);
+}
+
+/* ── Main Layout ───────────────────────────────────────── */
+.dashboard-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 10px;
+  padding: 10px 12px 0;
+  overflow: hidden;
+}
+
+/* ── Sidebars ──────────────────────────────────────────── */
+.dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  min-width: 320px;
+  gap: 9px;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 40px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar { width: 3px; }
+.dashboard-sidebar::-webkit-scrollbar-track { background: transparent; }
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+  background: var(--cyan-border-2);
+  border-radius: 2px;
+}
+
+/* ── Center Column ─────────────────────────────────────── */
+.dashboard-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 40px;
+}
+
+.dashboard-center::-webkit-scrollbar { width: 3px; }
+.dashboard-center::-webkit-scrollbar-track { background: transparent; }
+.dashboard-center::-webkit-scrollbar-thumb {
+  background: var(--cyan-border-2);
+  border-radius: 2px;
+}
+
+/* ── Map wrapper ───────────────────────────────────────── */
+.dashboard-center > :first-child {
+  flex: 0 0 auto;
+  height: 450px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--cyan-border);
+  position: relative;
+  background: #010d1a;
+  box-shadow: var(--glow-md), inset 0 0 60px rgba(0, 212, 255, 0.03);
+}
+
+/* ── Signal / bottom area ──────────────────────────────── */
+.center-bottom {
+  background: transparent;
+  flex-shrink: 0;
+}

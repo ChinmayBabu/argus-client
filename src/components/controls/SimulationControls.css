@@ -1,0 +1,267 @@
+/* SimulationControls — HUD Tactical Interface */
+
+.simulation-controls {
+  background: rgba(1, 15, 31, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: 'Inter', sans-serif;
+  color: #c0e8f8;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.05), inset 0 0 20px rgba(0, 212, 255, 0.02);
+}
+
+/* Corner brackets */
+.simulation-controls::before,
+.simulation-controls::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(0, 212, 255, 0.6);
+  border-style: solid;
+}
+.simulation-controls::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.simulation-controls::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+/* Header */
+.controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  margin-bottom: 12px;
+}
+
+.controls-header > span {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #00d4ff;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+.status-indicator {
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'SFMono-Regular', monospace;
+}
+
+.status-indicator.running {
+  background: rgba(0, 255, 136, 0.1);
+  color: #00ff88;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  animation: running-pulse 2s ease-in-out infinite;
+}
+
+.status-indicator.stopped {
+  background: rgba(0, 212, 255, 0.05);
+  color: #2a5a7a;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+@keyframes running-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(0, 255, 136, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(0, 255, 136, 0.5); }
+}
+
+/* Body */
+.controls-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Buttons */
+.control-buttons { display: flex; gap: 8px; }
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-icon { font-size: 0.7rem; }
+
+.btn-start {
+  background: rgba(0, 255, 136, 0.08);
+  color: #00ff88;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+.btn-start:hover {
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.2);
+}
+
+.btn-pause {
+  background: rgba(255, 149, 0, 0.08);
+  color: #ff9500;
+  border: 1px solid rgba(255, 149, 0, 0.3);
+}
+.btn-pause:hover {
+  background: rgba(255, 149, 0, 0.15);
+  box-shadow: 0 0 12px rgba(255, 149, 0, 0.2);
+}
+
+.btn-stop {
+  background: rgba(255, 59, 92, 0.08);
+  color: #ff3b5c;
+  border: 1px solid rgba(255, 59, 92, 0.3);
+}
+.btn-stop:hover {
+  background: rgba(255, 59, 92, 0.15);
+  box-shadow: 0 0 12px rgba(255, 59, 92, 0.2);
+}
+
+/* Speed */
+.speed-control { display: flex; align-items: center; gap: 10px; }
+
+.speed-label {
+  font-size: 0.6rem;
+  color: #2a5a7a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-width: 44px;
+  font-family: 'SFMono-Regular', monospace;
+}
+
+.speed-buttons { display: flex; gap: 3px; flex: 1; }
+
+.speed-btn {
+  flex: 1;
+  padding: 5px 4px;
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: 2px;
+  color: #2a5a7a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'SFMono-Regular', monospace;
+  letter-spacing: 0.05em;
+}
+.speed-btn:hover {
+  background: rgba(0, 212, 255, 0.1);
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.3);
+}
+.speed-btn.active {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.5);
+  color: #00d4ff;
+  text-shadow: 0 0 6px rgba(0, 212, 255, 0.6);
+}
+
+/* Scenario */
+.scenario-control { display: flex; align-items: center; gap: 10px; }
+
+.scenario-label {
+  font-size: 0.6rem;
+  color: #2a5a7a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-width: 58px;
+  font-family: 'SFMono-Regular', monospace;
+}
+
+.scenario-select {
+  flex: 1;
+  padding: 5px 8px;
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 2px;
+  color: #c0e8f8;
+  font-size: 0.7rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: 'Inter', sans-serif;
+}
+.scenario-select:disabled { opacity: 0.4; cursor: not-allowed; }
+.scenario-select option { background: #010f1f; color: #c0e8f8; }
+
+/* Sim link row */
+.sim-link-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  background: rgba(0, 212, 255, 0.03);
+}
+
+.sim-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sim-dot-online {
+  background: #00ff88;
+  box-shadow: 0 0 5px rgba(0, 255, 136, 0.7);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+.sim-dot-offline { background: #ff3b5c; }
+
+.sim-link-label {
+  font-size: 0.58rem;
+  font-family: 'SFMono-Regular', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sim-link-online  .sim-link-label { color: #00ff88; }
+.sim-link-offline .sim-link-label { color: #ff3b5c; }
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Sim Time */
+.simulation-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  background: rgba(0, 212, 255, 0.04);
+  border-radius: 2px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.time-label {
+  font-size: 0.6rem;
+  color: #2a5a7a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'SFMono-Regular', monospace;
+}
+
+.time-value {
+  font-size: 0.9rem;
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  color: #ff9500;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 8px rgba(255, 149, 0, 0.5);
+}

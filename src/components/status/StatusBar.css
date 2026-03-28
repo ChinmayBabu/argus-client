@@ -1,0 +1,62 @@
+/* StatusBar — HUD System Strip */
+
+.status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 26px;
+  background: rgba(1, 12, 24, 0.97);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 -1px 15px rgba(0, 212, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+  font-size: 9px;
+  color: #2a5a7a;
+  z-index: 1000;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.status-section { display: flex; align-items: center; gap: 18px; }
+
+/* Connection indicator */
+.status-indicator { display: flex; align-items: center; gap: 6px; }
+
+.indicator-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #2a5a7a;
+}
+
+.status-indicator.connected .indicator-dot {
+  background: #00ff88;
+  box-shadow: 0 0 5px rgba(0, 255, 136, 0.6);
+  animation: status-blink 3s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 5px rgba(0, 255, 136, 0.6); }
+  50% { opacity: 0.7; box-shadow: 0 0 2px rgba(0, 255, 136, 0.3); }
+}
+
+.indicator-text { font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em; color: #2a5a7a; }
+.status-indicator.connected .indicator-text { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
+
+/* Items */
+.status-item { display: flex; align-items: center; gap: 6px; }
+.status-label { color: #0f3a56; font-size: 8.5px; }
+.status-value { color: #2a5a7a; font-weight: 500; }
+
+/* Time */
+.status-time {
+  color: #ff9500;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 9px;
+  text-shadow: 0 0 6px rgba(255, 149, 0, 0.4);
+}
