@@ -147,4 +147,4 @@ export class WebSocketService {
 
 // ── Singleton ─────────────────────────────────────────────────────────────────
 // Server WebSocket is at /stream (streaming.py mounts @router.websocket("/stream"))
-export const wsService = new WebSocketService('ws://localhost:8000/stream');
+export const wsService = new WebSocketService('wss://argus-server-970096522851.asia-south1.run.app/stream');

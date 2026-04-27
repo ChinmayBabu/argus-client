@@ -105,7 +105,7 @@ export const useDashboardStore = create<DashboardState>((set) => ({
 
   systemStatus: {
     websocket_connected: false,
-    server_url: 'ws://localhost:8000',
+    server_url: 'wss://argus-server-970096522851.asia-south1.run.app/',
     last_heartbeat: Date.now(),
     fps: 0,
   },

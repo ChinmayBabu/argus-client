@@ -1,7 +1,7 @@
 import type { TelemetryFrame, Threat, Mission, MissionEvent, Countermeasure } from '../types';
 
 // Server uses /api/v1 prefix
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = 'https://argus-server-970096522851.asia-south1.run.app/api/v1';
 
 export const api = {
   // ── Telemetry ─────────────────────────────────────────────────────────────
@@ -20,7 +20,7 @@ export const api = {
   // ── Threats ───────────────────────────────────────────────────────────────
   async getThreats(): Promise<Threat[]> { return []; },
   async getActiveThreats(): Promise<Threat[]> { return []; },
-  async acknowledgeThreat(_threatId: string): Promise<void> {},
+  async acknowledgeThreat(_threatId: string): Promise<void> { },
 
   // ── Mission ───────────────────────────────────────────────────────────────
   async getMission(_missionId: string): Promise<Mission | null> { return null; },
@@ -36,9 +36,9 @@ export const api = {
     return res.json();
   },
 
-  async pauseMission(_missionId: string): Promise<void> {},
-  async resumeMission(_missionId: string): Promise<void> {},
-  async abortMission(_missionId: string): Promise<void> {},
+  async pauseMission(_missionId: string): Promise<void> { },
+  async resumeMission(_missionId: string): Promise<void> { },
+  async abortMission(_missionId: string): Promise<void> { },
 
   // ── Events ────────────────────────────────────────────────────────────────
   async getEvents(_missionId?: string, _limit: number = 100): Promise<MissionEvent[]> {
@@ -50,7 +50,7 @@ export const api = {
   async activateCountermeasure(_id: string): Promise<Countermeasure> {
     throw new Error('Not implemented');
   },
-  async deactivateCountermeasure(_id: string): Promise<void> {},
+  async deactivateCountermeasure(_id: string): Promise<void> { },
 
   // ── Simulation Control ────────────────────────────────────────────────────
   /**
