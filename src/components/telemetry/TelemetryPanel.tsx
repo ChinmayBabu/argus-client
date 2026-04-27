@@ -58,7 +58,7 @@ const CHANNEL_GROUPS = [
     ],
   },
   {
-    title: 'Attitude',
+    title: 'Altitude',
     channels: [
       { key: 'attitude_roll', label: 'Roll', unit: '°' },
       { key: 'attitude_pitch', label: 'Pitch', unit: '°' },

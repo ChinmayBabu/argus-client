@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# ARGUS Client (Mission Dashboard)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend dashboard for the ARGUS platform. It visualizes live satellite telemetry, AI threat detections, mission logs, simulation state, and blockchain verification feedback.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. React 19 + TypeScript
+2. Vite
+3. Zustand (state)
+4. WebSocket streaming
+5. Cesium + Recharts for map and charting
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Authentication gate (demo mode enabled by default)
+2. Real-time telemetry and threat event rendering
+3. Mission map and signal graphs
+4. Simulation attack mode controls
+5. Blockchain verification panel
 
-## Expanding the ESLint configuration
+## Local Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Node.js 20+
+2. npm 10+
+3. Backend running on `http://localhost:8000`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Install and run
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+By default Vite serves on `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Demo Login
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The UI currently defaults to demo auth in [`src/components/auth/Auth.tsx`](src/components/auth/Auth.tsx).
+
+1. Email: `operator@argus.space`
+2. Password: `argus123`
+
+## Runtime Integration Points
+
+1. WebSocket stream: `ws://localhost:8000/stream` (configured in [`src/services/websocket.ts`](src/services/websocket.ts))
+2. REST base URL: `http://localhost:8000/api/v1` (configured in [`src/services/api.ts`](src/services/api.ts))
+3. Simulation controls call `/api/v1/simulation/control`
+4. Simulation status polls `/api/v1/simulation/status`
+
+## Key Scripts
+
+1. `npm run dev` - start local dev server
+2. `npm run build` - type-check + production build
+3. `npm run preview` - preview production bundle
+4. `npm run lint` - lint project
+
+## Project Layout
+
+1. `src/components` - dashboard UI modules (auth, telemetry, threats, controls, logs, blockchain, map, status)
+2. `src/services` - API and WebSocket client logic
+3. `src/stores` - Zustand dashboard store
+4. `src/types` - shared frontend types
+
+## Notes and Known Gaps
+
+1. Backend URLs are currently hardcoded (no env-based switching yet).
+2. Demo auth is enabled (`DEMO_MODE = true`) and bypasses backend login.
+3. Some API helpers in `src/services/api.ts` are stubs for future expansion.
