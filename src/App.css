@@ -92,6 +92,33 @@
   gap: 14px;
 }
 
+.route-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 18px;
+}
+
+.route-link {
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.route-link:hover,
+.route-link.active {
+  color: var(--cyan);
+  border-color: var(--cyan-border);
+  background: var(--cyan-glow);
+  box-shadow: var(--glow-sm);
+}
+
 .header-user {
   font-size: 0.7rem;
   color: var(--cyan-dim);
@@ -131,6 +158,8 @@
   padding: 10px 12px 0;
   overflow: hidden;
 }
+
+.route-main { min-height: 0; }
 
 /* ── Sidebars ──────────────────────────────────────────── */
 .dashboard-sidebar {

@@ -61,7 +61,6 @@ export default function Auth({ onAuthenticated }: AuthProps) {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-logo">
-          <span className="logo-icon">🛰️</span>
           <h1 className="logo-title">ARGUS</h1>
           <p className="logo-subtitle">Satellite Telemetry Dashboard</p>
         </div>
