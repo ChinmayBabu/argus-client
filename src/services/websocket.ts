@@ -2,22 +2,27 @@ type MessageHandler = (data: any) => void;
 
 export class WebSocketService {
   private ws: WebSocket | null = null;
-  private url: string;
+  private urls: string[];
+  private urlIndex = 0;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 10;
   private reconnectDelay = 1000;
   private handlers: Map<string, Set<MessageHandler>> = new Map();
   private isConnected = false;
   private heartbeatInterval: number | null = null;
+  private shouldReconnect = true;
 
-  constructor(url: string) {
-    this.url = url;
+  constructor(urls: string | string[]) {
+    this.urls = typeof urls === 'string' ? [urls] : urls;
   }
 
   connect(onStatusChange?: (connected: boolean) => void): Promise<void> {
     return new Promise((resolve, reject) => {
       try {
-        this.ws = new WebSocket(this.url);
+        this.shouldReconnect = true;
+        const url = this.urls[this.urlIndex];
+        console.log(`[WS] Connecting to ${url}`);
+        this.ws = new WebSocket(url);
 
         this.ws.onopen = () => {
           console.log('[WS] Connected to ARGUS server');
@@ -33,7 +38,11 @@ export class WebSocketService {
           this.isConnected = false;
           this.stopHeartbeat();
           onStatusChange?.(false);
-          this.attemptReconnect(onStatusChange);
+          if (this.shouldReconnect) {
+            this.urlIndex = (this.urlIndex + 1) % this.urls.length;
+            console.log(`[WS] Falling back to ${this.urls[this.urlIndex]}`);
+            this.attemptReconnect(onStatusChange);
+          }
         };
 
         this.ws.onerror = (error) => {
@@ -58,6 +67,7 @@ export class WebSocketService {
   }
 
   disconnect(): void {
+    this.shouldReconnect = false;
     this.stopHeartbeat();
     if (this.ws) {
       this.ws.close();
@@ -147,4 +157,7 @@ export class WebSocketService {
 
 // ── Singleton ─────────────────────────────────────────────────────────────────
 // Server WebSocket is at /stream (streaming.py mounts @router.websocket("/stream"))
-export const wsService = new WebSocketService('wss://argus-server-970096522851.asia-south1.run.app/stream');
+export const wsService = new WebSocketService([
+  'wss://argus-server-970096522851.asia-south1.run.app/stream',
+  'ws://127.0.0.1:8000/stream',
+]);
